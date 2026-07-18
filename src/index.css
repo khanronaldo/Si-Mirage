@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-clean: "Montserrat", sans-serif;
+  --font-display: "Playfair Display", serif;
+  --font-classic: "Playfair Display", serif;
+  --font-serif: "Playfair Display", serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+}
+
+.font-classic {
+  font-family: 'Playfair Display', serif !important;
+}
+
+.font-clean {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #111;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
+
+/* Base custom styles to eliminate default focus ring outlines and replace with elegant ones */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #000;
+}
+
+/* Hide arrow for details tags on Safari */
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+/* --- 3D CAROUSEL CORE (PROFESSIONAL, OPTIMIZED & COMPACT) --- */
+.slider-3d-wrapper {
+    position: relative;
+    width: 240px;      /* Desktop size */
+    height: 350px;     /* Locked height to prevent shifting */
+    transform-style: preserve-3d;
+    animation: rotate3D 32s linear infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+}
+
+.slider-3d-wrapper:hover {
+    animation-play-state: paused;
+}
+
+.slider-3d-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: center;
+    transform-style: preserve-3d;
+    /* Orbit circle with perfect gap/distance (410px on desktop) */
+    transform: rotateY(var(--angle)) translateZ(410px) translate3d(0, 0, 0);
+    backface-visibility: visible;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+}
+
+/* CRUCIAL FIX: Image-only modern overlay container with smooth borders */
+.carousel-card-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Lock elements inside */
+    border-radius: 12px;
+    background: rgba(10, 10, 10, 0.95); /* Pure premium dark velvet background, slightly more opaque for contrast */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translate3d(0, 0, 0);
+    will-change: transform, border-color, box-shadow;
+}
+
+/* Hover glow effect */
+.carousel-card-container:hover {
+    transform: scale(1.03) translate3d(0, 0, 0);
+    border-color: rgba(255, 40, 0, 0.6); /* Red Accent Glow matching theme */
+    box-shadow: 0 12px 30px rgba(255, 40, 0, 0.2);
+}
+
+/* Perfect full product photo with object-contain to never crop any aspect ratio */
+.carousel-card-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 16px;
+    background-color: #0d0d0d;
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.carousel-card-container:hover img {
+    transform: scale(1.06) translate3d(0, 0, 0);
+}
+
+@keyframes rotate3D {
+    0% {
+        transform: perspective(1200px) rotateY(0deg) translate3d(0, 0, 0);
+    }
+    100% {
+        transform: perspective(1200px) rotateY(360deg) translate3d(0, 0, 0);
+    }
+}
+
+/* --- MOBILE LAYOUT (SMARTPHONES < 640px) --- */
+@media screen and (max-width: 640px) {
+    .slider-3d-wrapper {
+        width: 160px;   /* Perfect compact size for mobile screen */
+        height: 240px;  
+    }
+    
+    .slider-3d-item {
+        /* Mobile circular orbit with perfect spacing */
+        transform: rotateY(var(--angle)) translateZ(240px) translate3d(0, 0, 0);
+    }
+
+    .carousel-card-container {
+        border-radius: 10px;
+    }
+
+    .carousel-card-container img {
+        padding: 10px;
+    }
+}
